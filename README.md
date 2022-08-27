@@ -8,7 +8,9 @@ Blazor Server 7.0 버전에 대한 기초 입문 강좌입니다.
 
 완성된 모든 강의는 데브렉(http://www.devlec.com)을 통해서 서비스가 됩니다. 
 
-VisualAcademy Docs: https://www.VisualAcademy.com/docs/blazor-server/blazor-server-7-fundamentals/
+VisualAcademy Docs: 
+
+* https://www.VisualAcademy.com/docs/blazor-server/blazor-server-7-fundamentals/
 
 ## Blazor Server 강의 목록
 
