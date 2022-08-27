@@ -19,6 +19,8 @@ https://www.youtube.com/playlist?list=PLO56HZSjrPTAS3bC6UUNWBH9ih5yujpvS
 
 https://youtu.be/J6mQGd5GM_I
 
+> [!Video https://www.youtube.com/embed/J6mQGd5GM_I]
+
 ### 01_02_Blazor 학습을 위한 .NET 7 SDK 다운로드 및 설치
 
 https://youtu.be/JwsbiAlmALs
