@@ -25,26 +25,37 @@ https://youtu.be/J6mQGd5GM_I
 
 https://youtu.be/JwsbiAlmALs
 
+> [!Video https://www.youtube.com/embed/JwsbiAlmALs]
+
 ### 01_03_Blazor Server Empty 프로젝트 생성 및 실행 데모
 
 https://youtu.be/suLmMuRKw8o
+
+> [!Video https://www.youtube.com/embed/suLmMuRKw8o]
 
 ### 02_01_Blazor Server 기본 템플릿으로 Hawaso 프로젝트 생성 및 실행하기 데모
 
 https://youtu.be/Ar0zonv8hQc
 
+> [!Video https://www.youtube.com/embed/Ar0zonv8hQc]
+
 ### 02_02_라우팅과 컴포넌트 개념을 사용하여 Noodles 컴포넌트 만들기
 
 https://youtu.be/VRHIDEq49Ak
+
+> [!Video https://www.youtube.com/embed/VRHIDEq49Ak]
 
 ### 02_03_NavLink 컴포넌트로 Noodles 컴포넌트로 이동하는 메뉴 링크 만들기
 
 https://youtu.be/iqjCZv-Nky4
 
+> [!Video https://www.youtube.com/embed/iqjCZv-Nky4]
+
 ## 02_04_자주 사용하는 CRUD 관련 컴포넌트들 생성
 
 https://youtu.be/sesbup7Ma5s
 
+> [!Video https://www.youtube.com/embed/sesbup7Ma5s]
 
 
 
