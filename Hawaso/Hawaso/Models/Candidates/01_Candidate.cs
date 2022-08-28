@@ -20,7 +20,7 @@ namespace Hawaso.Models.Candidates
         public bool IsEnrollment { get; set; }
     }
 
-    public class Cadidate : CandidateBase
+    public class Candidate : CandidateBase
     {
         // Emtpty
     }
