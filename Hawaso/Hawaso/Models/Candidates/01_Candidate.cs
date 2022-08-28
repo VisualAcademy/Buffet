@@ -22,6 +22,6 @@ namespace Hawaso.Models.Candidates
 
     public class Candidate : CandidateBase
     {
-        // Emtpty
+        // Empty
     }
 }
