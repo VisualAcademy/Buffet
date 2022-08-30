@@ -13,7 +13,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
 // 새로운 DbContext 추가 
-builder.Services.AddDbContext<CandidateAppDbContext>(options => 
+builder.Services.AddDbContext<CandidateAppDbContext>(options =>
     options.UseSqlServer(connectionString));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -26,12 +26,18 @@ builder.Services.AddSingleton<WeatherForecastService>();
 
 var app = builder.Build();
 
+// 개발 환경에서 Update-Database, Seed 데이터 추가
+if (app.Environment.IsDevelopment())
+{
+    await CheckCandidateDbMigrated(app.Services);
+    CandidateSeedData(app);
+    CandidateDbInitializer.Initialize(app);
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
-
-    CandidateSeedData(app);
 }
 else
 {
@@ -53,12 +59,11 @@ app.MapControllers();
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
-if (app.Environment.IsDevelopment())
-{
-    CandidateDbInitializer.Initialize(app);
-}
-
 app.Run();
+
+
+
+
 
 #region CandidateSeedData: Candidates 테이블에 기본 데이터 입력
 // Candidates 테이블에 기본 데이터 입력
@@ -85,3 +90,20 @@ static void CandidateSeedData(WebApplication app)
 }
 
 #endregion
+
+#region CheckCandidateDbMigrated: 데이터베이스 마이그레이션 진행
+// 데이터베이스 마이그레이션 진행
+async Task CheckCandidateDbMigrated(IServiceProvider services)
+{
+    using var scope = services.CreateScope();
+    using var candidateContext = scope.ServiceProvider.GetService<CandidateAppDbContext>();
+    if (candidateContext is not null)
+    {
+        await candidateContext.Database.MigrateAsync();
+    }
+}
+
+#endregion
+
+
+
