@@ -30,6 +30,8 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
+
+    CandidateSeedData(app);
 }
 else
 {
@@ -52,3 +54,26 @@ app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
 app.Run();
+
+// Candidates 테이블에 기본 데이터 입력
+static void CandidateSeedData(WebApplication app)
+{
+    // https://docs.microsoft.com/ko-kr/aspnet/core/fundamentals/dependency-injection
+    // ?view=aspnetcore-6.0#resolve-a-service-at-app-start-up
+    using (var serviceScope = app.Services.CreateScope())
+    {
+        var services = serviceScope.ServiceProvider;
+
+        var candidateDbContext = services.GetRequiredService<CandidateAppDbContext>();
+
+        if (!candidateDbContext.Candidates.Any())
+        {
+            candidateDbContext.Candidates.Add(
+                new Candidate { FirstName = "길동", LastName = "홍", IsEnrollment = false });
+            candidateDbContext.Candidates.Add(
+                new Candidate { FirstName = "두산", LastName = "백", IsEnrollment = false });
+
+            candidateDbContext.SaveChanges();
+        }
+    }
+}
