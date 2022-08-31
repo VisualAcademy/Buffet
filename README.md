@@ -69,3 +69,14 @@ https://youtu.be/ECO7pxJMizM
 > [!Video https://www.youtube.com/embed/ECO7pxJMizM]
 
 
+## 03_02_DbContext 클래스에 DbSet of T 형태의 컬렉션 속성 3개 추가히기
+
+https://youtu.be/Bod5IJGeFZE
+
+> [!Video https://www.youtube.com/embed/Bod5IJGeFZE]
+
+
+
+
+
+
