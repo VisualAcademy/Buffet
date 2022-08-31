@@ -62,5 +62,10 @@ https://youtu.be/sesbup7Ma5s
 > [!Video https://www.youtube.com/embed/sesbup7Ma5s]
 
 
+## 03_01_Models_Broth, Noodle, Garnish 클래스 추가
+
+https://youtu.be/ECO7pxJMizM
+
+> [!Video https://www.youtube.com/embed/ECO7pxJMizM]
 
 
