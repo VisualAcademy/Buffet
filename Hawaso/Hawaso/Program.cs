@@ -77,6 +77,7 @@ static void CandidateSeedData(WebApplication app)
 
         var candidateDbContext = services.GetRequiredService<CandidateAppDbContext>();
 
+        // Candidates 테이블에 데이터가 없을 때에만 데이터 입력
         if (!candidateDbContext.Candidates.Any())
         {
             candidateDbContext.Candidates.Add(
@@ -88,7 +89,6 @@ static void CandidateSeedData(WebApplication app)
         }
     }
 }
-
 #endregion
 
 #region CheckCandidateDbMigrated: 데이터베이스 마이그레이션 진행
@@ -104,6 +104,3 @@ async Task CheckCandidateDbMigrated(IServiceProvider services)
 }
 
 #endregion
-
-
-
