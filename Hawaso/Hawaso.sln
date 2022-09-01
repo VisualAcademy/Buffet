@@ -5,6 +5,8 @@ VisualStudioVersion = 17.4.32804.182
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hawaso", "Hawaso\Hawaso.csproj", "{053F8DCA-B22B-479C-A95D-BBAB725F3BAD}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Hawaso.SqlServer", "Hawaso.SqlServer\Hawaso.SqlServer.sqlproj", "{EE893AA2-8553-4ACF-AEE7-B6FF6897334E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,12 @@ Global
 		{053F8DCA-B22B-479C-A95D-BBAB725F3BAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{053F8DCA-B22B-479C-A95D-BBAB725F3BAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{053F8DCA-B22B-479C-A95D-BBAB725F3BAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE893AA2-8553-4ACF-AEE7-B6FF6897334E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE893AA2-8553-4ACF-AEE7-B6FF6897334E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE893AA2-8553-4ACF-AEE7-B6FF6897334E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{EE893AA2-8553-4ACF-AEE7-B6FF6897334E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE893AA2-8553-4ACF-AEE7-B6FF6897334E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE893AA2-8553-4ACF-AEE7-B6FF6897334E}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
