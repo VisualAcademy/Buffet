@@ -3,7 +3,8 @@
 @page "/Candidates/List"
 @using Hawaso.Models.Candidates
 @using Microsoft.EntityFrameworkCore
-@inject CandidateAppDbContext _Context
+@*@inject CandidateAppDbContext _Context*@
+@inject IDbContextFactory<CandidateAppDbContext> _ContextFactory
 
 <PageTitle>Candidate List</PageTitle>
 
@@ -64,6 +65,8 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        Candidates = await _Context.Candidates.ToArrayAsync();
+        //Candidates = await _Context.Candidates.ToArrayAsync();
+        using var context = _ContextFactory.CreateDbContext();
+        Candidates = await context.Candidates.ToArrayAsync();
     }
 }
