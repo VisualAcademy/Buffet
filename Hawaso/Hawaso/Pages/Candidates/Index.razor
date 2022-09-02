@@ -1,0 +1,69 @@
+﻿@page "/Candidates"
+@page "/Candidates/Index"
+@page "/Candidates/List"
+@using Hawaso.Models.Candidates
+@using Microsoft.EntityFrameworkCore
+@inject CandidateAppDbContext _Context
+
+<PageTitle>Candidate List</PageTitle>
+
+<h1>Index</h1>
+
+<p>
+    <a href="/Candidates/Create">Create New</a>
+</p>
+
+@if (Candidates is null)
+{
+    <div>Loading...</div>
+}
+else
+{
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    FirstName
+                </th>
+                <th>
+                    LastName
+                </th>
+                <th>
+                    Is Enrollment
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in Candidates)
+            {
+                <tr>
+                    <td>
+                        @m.FirstName
+                    </td>
+                    <td>
+                        @m.LastName
+                    </td>
+                    <td>
+                        <input class="check-box" type="checkbox" checked="@m.IsEnrollment" />
+                    </td>
+                    <td>
+                        <a href="/Candidates/Edit/@m.Id">Edit</a> |
+                        <a href="/Candidates/Details/@m.Id">Details</a> |
+                        <a href="/Candidates/Delete/@m.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    // 현재 페이지에서 사용할 모델 또는 컬렉션
+    private Candidate[]? Candidates { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Candidates = await _Context.Candidates.ToArrayAsync();
+    }
+}
