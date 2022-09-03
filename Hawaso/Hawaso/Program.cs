@@ -1,6 +1,9 @@
 using Hawaso.Areas.Identity;
 using Hawaso.Data;
 using Hawaso.Models.Candidates;
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
