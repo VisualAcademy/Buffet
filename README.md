@@ -76,6 +76,14 @@ https://youtu.be/Bod5IJGeFZE
 > [!Video https://www.youtube.com/embed/Bod5IJGeFZE]
 
 
+## 03_03_EF Core Add Migration과 Update Database 명령 실행하여 DB와 Table 생성
+
+https://youtu.be/kEGIj5IOPSI
+
+> [!Video https://www.youtube.com/embed/kEGIj5IOPSI]
+
+
+
 
 
 
