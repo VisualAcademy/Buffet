@@ -7,6 +7,14 @@
 
 <h4>Candidate</h4>
 <hr />
+
+@if (!String.IsNullOrEmpty(StatusMessage))
+{
+    <div class="alert alert-success">
+        @StatusMessage
+    </div>
+}
+
 <div class="row">
     <div class="col-md-4">
         @if (Model is not null)
@@ -52,6 +60,8 @@
 @code {
     public Candidate? Model { get; set; }
 
+    public string? StatusMessage { get; set; }
+
     protected override void OnInitialized()
     {
         //Model = new Candidate { FirstName = "YJ", LastName = "Park", IsEnrollment = true };
@@ -60,15 +70,24 @@
 
     protected async Task FormSubmit()
     {
-        if (Model is not null)
+        try
         {
-            Model.Age = 0; 
-
-            using (var ctx = _ContextFactory.CreateDbContext())
+            if (Model is not null)
             {
-                ctx.Candidates.Add(Model);
-                await ctx.SaveChangesAsync();
+                Model.Age = 0;
+
+                using (var ctx = _ContextFactory.CreateDbContext())
+                {
+                    ctx.Candidates.Add(Model);
+                    await ctx.SaveChangesAsync();
+                }
+
+                StatusMessage = "Success";
             }
+        }
+        catch (Exception)
+        {
+            StatusMessage = "Error"; 
         }
     }
 }
