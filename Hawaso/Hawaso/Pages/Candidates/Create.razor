@@ -92,15 +92,11 @@
             {
                 Model.Age = 0;
 
-                using (var ctx = _ContextFactory.CreateDbContext())
-                {
-                    ctx.Candidates.Add(Model);
-                    await ctx.SaveChangesAsync();
-
-                    // await Task.Delay(5000); 
-
-                    Model = new(); 
-                }
+                using var ctx = _ContextFactory.CreateDbContext();
+                ctx.Candidates.Add(Model);
+                await ctx.SaveChangesAsync();
+                // await Task.Delay(5000); 
+                Model = new() { IsEnrollment = Model.IsEnrollment }; 
 
                 StatusMessage = "Success";
             }
