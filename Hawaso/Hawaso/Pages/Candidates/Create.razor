@@ -22,7 +22,9 @@
     <div class="col-md-4">
         @if (Model is not null)
         {
-            <EditForm Model="@Model" OnValidSubmit="FormSubmit">
+            <EditForm Model="@Model" 
+                OnValidSubmit="FormSubmit" 
+                OnInvalidSubmit="@HandleInvalidSubmit">
                 <DataAnnotationsValidator />
                 <ValidationSummary />
 
@@ -111,5 +113,10 @@
         {
             Busy = false;         
         }
+    }
+
+    protected void HandleInvalidSubmit()
+    {
+        StatusMessage = ""; 
     }
 }
