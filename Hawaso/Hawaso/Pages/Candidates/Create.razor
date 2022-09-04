@@ -1,4 +1,5 @@
 ﻿@page "/Candidates/Create"
+@inject IDbContextFactory<CandidateAppDbContext> _ContextFactory
 
 <PageTitle>Candidate Create</PageTitle>
 
@@ -10,7 +11,7 @@
     <div class="col-md-4">
         @if (Model is not null)
         {
-            <EditForm Model="@Model">
+            <EditForm Model="@Model" OnValidSubmit="FormSubmit">
                 <DataAnnotationsValidator />
                 <ValidationSummary />
 
@@ -31,7 +32,7 @@
                 <div class="form-group form-check">
                     <label class="form-check-label" for="IsEnrollment">
                         @*<input class="form-check-input" type="checkbox" data-val="true" data-val-required="The IsEnrollment field is required." id="IsEnrollment" name="IsEnrollment" value="true" /> *@
-                        <InputCheckbox @bind-Value="Model.IsEnrollment" id="IsEnrollment" class="form-check-input" />                        
+                        <InputCheckbox @bind-Value="Model.IsEnrollment" id="IsEnrollment" class="form-check-input" />
                         Is Enrollment
                     </label>
                 </div>
@@ -54,6 +55,20 @@
     protected override void OnInitialized()
     {
         //Model = new Candidate { FirstName = "YJ", LastName = "Park", IsEnrollment = true };
-        Model = new(); 
+        Model = new();
+    }
+
+    protected async Task FormSubmit()
+    {
+        if (Model is not null)
+        {
+            Model.Age = 0; 
+
+            using (var ctx = _ContextFactory.CreateDbContext())
+            {
+                ctx.Candidates.Add(Model);
+                await ctx.SaveChangesAsync();
+            }
+        }
     }
 }
