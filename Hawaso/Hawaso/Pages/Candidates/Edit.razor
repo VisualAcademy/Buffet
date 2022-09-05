@@ -7,13 +7,27 @@
 
 <h4>Candidate</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <Hawaso.Pages.Candidates.Components.EditorForm
-            Model="@Model"
-        ></Hawaso.Pages.Candidates.Components.EditorForm>
+
+@if (Model is null && !Busy)
+{
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"
+            aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        Not Found
     </div>
-</div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <Hawaso.Pages.Candidates.Components.EditorForm
+                Model="@Model" Busy="@Busy"
+            ></Hawaso.Pages.Candidates.Components.EditorForm>
+        </div>
+    </div>
+}
 
 <div>
     <a href="/Candidates">Back to List</a>
@@ -25,9 +39,20 @@
 
     public Candidate? Model { get; set; }
 
+    public bool Busy { get; set; }
+
     protected override async Task OnParametersSetAsync()
     {
-        using var ctx = ContextFactoryInjector.CreateDbContext();
-        Model = await ctx.Candidates.FirstOrDefaultAsync(it => it.Id == Id);
+        Busy = true;
+
+        try
+        {
+            using var ctx = ContextFactoryInjector.CreateDbContext();
+            Model = await ctx.Candidates.FirstOrDefaultAsync(it => it.Id == Id);
+        }
+        finally
+        {
+            Busy = false;            
+        }
     }
 }
