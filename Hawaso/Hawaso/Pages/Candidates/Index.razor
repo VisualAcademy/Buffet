@@ -1,6 +1,8 @@
-﻿@page "/Candidates"
+﻿@*@page "/Candidates"*@
+@page "/Candidates/{Page:int?}"
 @page "/Candidates/Index"
 @page "/Candidates/List"
+
 @using Hawaso.Models.Candidates
 @using Microsoft.EntityFrameworkCore
 @*@inject CandidateAppDbContext _Context*@
@@ -68,12 +70,25 @@ else
     /// </summary>
     public int PageSize { get; set; } = 4;
 
+    [Parameter]
+    public int? Page { get; set; } // PageNumber
+
+    public int PageIndex { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
+        if (Page is null)
+        {
+            Page = 1; 
+        }
+
+        PageIndex = Page.Value - 1; 
+
         //Candidates = await _Context.Candidates.ToArrayAsync();
         using var context = _ContextFactory.CreateDbContext();
         Candidates = await context.Candidates
             .OrderBy(it => it.FirstName)
+            .Skip(PageIndex * PageSize)
             .Take(PageSize)
             .ToArrayAsync();
     }
