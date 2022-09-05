@@ -32,6 +32,9 @@
             @if (IsEdit)
             {
                 <input type="submit" value="Edit" class="btn btn-primary" disabled="@Busy" />
+                <input type="button" value="Cancel" class="btn btn-secondary" disabled="@Busy" 
+                    @onclick="HandleCancel"
+                />
             }
             else
             {
@@ -67,6 +70,17 @@
         if (OnSubmitCallback.HasDelegate)
         {
             await OnSubmitCallback.InvokeAsync(false);
+        }
+    }
+
+    [Parameter]
+    public EventCallback OnCancelCallback { get; set; }
+
+    protected async Task HandleCancel()
+    {
+        if (OnCancelCallback.HasDelegate)
+        {
+            await OnCancelCallback.InvokeAsync();     
         }
     }
 }

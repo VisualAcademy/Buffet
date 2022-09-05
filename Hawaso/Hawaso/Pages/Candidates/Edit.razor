@@ -40,7 +40,9 @@ else
         <div class="col-md-4">
             <Hawaso.Pages.Candidates.Components.EditorForm
                 Model="@Model" Busy="@Busy" IsEdit="true"
-                OnSubmitCallback="@OnSubmitCallback">
+                OnSubmitCallback="@OnSubmitCallback"
+                OnCancelCallback="@GotoIndexPage"
+            >
             </Hawaso.Pages.Candidates.Components.EditorForm>
         </div>
     </div>
@@ -92,11 +94,7 @@ else
             await ctx.SaveChangesAsync();
 
             //StatusMessage = "Success";
-
-            var result = await ProtectedLocalStore.GetAsync<int>("Page");
-            var currentPage = result.Success ? result.Value : 1; 
-
-            NavigationManagerInjector.NavigateTo($"/Candidates/{currentPage}");
+            await GotoIndexPage(); 
         }
         catch (Exception)
         {
@@ -106,5 +104,13 @@ else
         {
             Busy = false;
         }
+    }
+
+    private async Task GotoIndexPage()
+    {
+        var result = await ProtectedLocalStore.GetAsync<int>("Page");
+        var currentPage = result.Success ? result.Value : 1;
+
+        NavigationManagerInjector.NavigateTo($"/Candidates/{currentPage}");
     }
 }
