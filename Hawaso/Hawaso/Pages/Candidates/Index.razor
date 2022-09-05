@@ -63,10 +63,18 @@ else
     // 현재 페이지에서 사용할 모델 또는 컬렉션
     private Candidate[]? Candidates { get; set; }
 
+    /// <summary>
+    /// 페이지 사이즈: 한 페이지에 몇 개의 레코드를 보여줄건지 결정
+    /// </summary>
+    public int PageSize { get; set; } = 4;
+
     protected override async Task OnInitializedAsync()
     {
         //Candidates = await _Context.Candidates.ToArrayAsync();
         using var context = _ContextFactory.CreateDbContext();
-        Candidates = await context.Candidates.ToArrayAsync();
+        Candidates = await context.Candidates
+            .OrderBy(it => it.FirstName)
+            .Take(PageSize)
+            .ToArrayAsync();
     }
 }
