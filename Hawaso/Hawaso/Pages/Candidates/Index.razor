@@ -7,6 +7,7 @@
 @using Microsoft.EntityFrameworkCore
 @*@inject CandidateAppDbContext _Context*@
 @inject IDbContextFactory<CandidateAppDbContext> _ContextFactory
+@inject NavigationManager NavigationManagerInjector
 
 <PageTitle>Candidate List</PageTitle>
 
@@ -79,7 +80,9 @@ else
     {
         if (Page is null or < 1)
         {
-            Page = 1; 
+            //Page = 1; 
+            NavigationManagerInjector.NavigateTo("/Candidates/1");
+            return;
         }
 
         PageIndex = Page.Value - 1; 
