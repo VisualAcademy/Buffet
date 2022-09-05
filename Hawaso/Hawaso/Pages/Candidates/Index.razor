@@ -8,6 +8,9 @@
 @inject IDbContextFactory<CandidateAppDbContext> _ContextFactory
 @inject NavigationManager NavigationManagerInjector
 
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@inject ProtectedLocalStorage ProtectedLocalStore
+
 <PageTitle>Candidate List</PageTitle>
 
 <h1>Index</h1>
@@ -132,9 +135,18 @@ else
         }
 
         Candidates = await context.Candidates
-            .OrderBy(it => it.FirstName)
+            .OrderByDescending(it => it.Id)
             .Skip(PageIndex * PageSize)
             .Take(PageSize)
             .ToArrayAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (Page is not null)
+        {
+            // 현재 페이지 번호를 상태 데이터에 저장
+            await ProtectedLocalStore.SetAsync("Page", Page.Value);
+        }
     }
 }
