@@ -1,7 +1,6 @@
-﻿@*@page "/Candidates"*@
-@page "/Candidates/{Page:int?}"
-@page "/Candidates/Index"
-@page "/Candidates/List"
+﻿@page "/Candidates/{Page:int?}"
+@page "/Candidates/Index/{Page:int?}"
+@page "/Candidates/List/{Page:int?}"
 
 @using Hawaso.Models.Candidates
 @using Microsoft.EntityFrameworkCore
@@ -76,12 +75,14 @@ else
 
     public int PageIndex { get; set; }
 
+    public int PageCount { get; set; } = 4;
+
     protected override async Task OnParametersSetAsync()
     {
         if (Page is null or < 1)
         {
             //Page = 1; 
-            NavigationManagerInjector.NavigateTo("/Candidates/1");
+            NavigationManagerInjector.NavigateTo("/Candidates/Index/1");
             return;
         }
 
@@ -89,6 +90,13 @@ else
 
         //Candidates = await _Context.Candidates.ToArrayAsync();
         using var context = _ContextFactory.CreateDbContext();
+
+        if (Page > PageCount)
+        {
+            NavigationManagerInjector.NavigateTo($"/Candidates/List/{PageCount}");
+            return;
+        }
+
         Candidates = await context.Candidates
             .OrderBy(it => it.FirstName)
             .Skip(PageIndex * PageSize)
