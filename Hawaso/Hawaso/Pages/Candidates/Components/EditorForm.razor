@@ -42,13 +42,22 @@
     [Parameter]
     public bool Busy { get; set; }
 
+    [Parameter]
+    public EventCallback<bool> OnSubmitCallback { get; set; }
+
     protected async Task FormSubmit()
     {
-
+        if (OnSubmitCallback.HasDelegate)
+        {
+            await OnSubmitCallback.InvokeAsync(true); 
+        }
     }
 
-    protected void HandleInvalidSubmit()
+    protected async Task HandleInvalidSubmit()
     {
-
+        if (OnSubmitCallback.HasDelegate)
+        {
+            await OnSubmitCallback.InvokeAsync(false);
+        }
     }
 }
