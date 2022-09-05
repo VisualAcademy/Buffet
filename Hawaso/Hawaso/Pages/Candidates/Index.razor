@@ -70,12 +70,26 @@ else
     /// </summary>
     public int PageSize { get; set; } = 4;
 
+    /// <summary>
+    /// 페이지 번호: 현재 보여줄 페이지 번호: 1 페이지, 2 페이지, ...
+    /// </summary>
     [Parameter]
     public int? Page { get; set; } // PageNumber
 
+    /// <summary>
+    /// 페이지 인덱스: 현재 보여줄 페이지 번호의 인덱스(PageNumber - 1)
+    /// </summary>
     public int PageIndex { get; set; }
 
-    public int PageCount { get; set; } = 4;
+    /// <summary>
+    /// 총 몇 개의 페이지가 만들어지는지: Math.Ceiling(총 레코드 수 / 10(한 페이지에서 보여줄))
+    /// </summary>
+    public int PageCount { get; set; }
+
+    /// <summary>
+    /// 레코드 카운트: 현재 테이블에 몇 개의 레코드가 있는지 지정
+    /// </summary>
+    public int RecordCount { get; set; }
 
     protected override async Task OnParametersSetAsync()
     {
@@ -90,6 +104,10 @@ else
 
         //Candidates = await _Context.Candidates.ToArrayAsync();
         using var context = _ContextFactory.CreateDbContext();
+
+        RecordCount = await context.Candidates.CountAsync();
+
+        PageCount = Convert.ToInt32(Math.Ceiling(RecordCount / (double)PageSize)); 
 
         if (Page > PageCount)
         {
