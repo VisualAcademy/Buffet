@@ -54,9 +54,10 @@ else
                         <input class="check-box" type="checkbox" checked="@m.IsEnrollment" />
                     </td>
                     <td>
-                        <a href="/Candidates/Edit/@m.Id">Edit</a> |
-                        <a href="/Candidates/Details/@m.Id">Details</a> |
-                        <a href="/Candidates/Delete/@m.Id">Delete</a>
+                        <a href="/Candidates/Edit/@m.Id" class="btn btn-primary btn-sm">Edit</a> |
+                        <input type="button" class="btn btn-danger btn-sm" value="Delete" 
+                            @onclick="() => DeleteBy(m)"
+                        />
                     </td>
                 </tr>
             }
@@ -148,5 +149,12 @@ else
             // 현재 페이지 번호를 상태 데이터에 저장
             await ProtectedLocalStore.SetAsync("Page", Page.Value);
         }
+    }
+
+    protected async Task DeleteBy(Candidate model)
+    {
+        using var context = _ContextFactory.CreateDbContext();
+        context.Candidates.Remove(model);
+        await context.SaveChangesAsync();
     }
 }
