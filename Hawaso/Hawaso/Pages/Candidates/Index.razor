@@ -11,6 +11,8 @@
 @using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @inject ProtectedLocalStorage ProtectedLocalStore
 
+@inject IJSRuntime JSRuntime
+
 <PageTitle>Candidate List</PageTitle>
 
 <h1>Index</h1>
@@ -54,9 +56,9 @@ else
                         <input class="check-box" type="checkbox" checked="@m.IsEnrollment" />
                     </td>
                     <td>
-                        <a href="/Candidates/Edit/@m.Id">Edit</a> |
-                        <a href="/Candidates/Details/@m.Id">Details</a> |
-                        <a href="/Candidates/Delete/@m.Id">Delete</a>
+                        <a href="/Candidates/Edit/@m.Id" class="btn btn-primary btn-sm">Edit</a> |
+                        <input type="button" class="btn btn-danger btn-sm" value="Delete"
+                       @onclick="() => DeleteBy(m)" />
                     </td>
                 </tr>
             }
@@ -112,21 +114,26 @@ else
 
     protected override async Task OnParametersSetAsync()
     {
+        await DisplayData();
+    }
+
+    private async Task DisplayData()
+    {
         if (Page is null or < 1)
         {
-            //Page = 1; 
+            //Page = 1;
             NavigationManagerInjector.NavigateTo("/Candidates/Index/1");
             return;
         }
 
-        PageIndex = Page.Value - 1; 
+        PageIndex = Page.Value - 1;
 
         //Candidates = await _Context.Candidates.ToArrayAsync();
         using var context = _ContextFactory.CreateDbContext();
 
         RecordCount = await context.Candidates.CountAsync();
 
-        PageCount = Convert.ToInt32(Math.Ceiling(RecordCount / (double)PageSize)); 
+        PageCount = Convert.ToInt32(Math.Ceiling(RecordCount / (double)PageSize));
 
         if (Page > PageCount)
         {
@@ -147,6 +154,20 @@ else
         {
             // 현재 페이지 번호를 상태 데이터에 저장
             await ProtectedLocalStore.SetAsync("Page", Page.Value);
+        }
+    }
+
+    protected async Task DeleteBy(Candidate model)
+    {
+        bool isDelete = await JSRuntime.InvokeAsync<bool>(
+            "confirm", "Are you sure you want to delete this?");
+        if (isDelete)
+        {
+            using var context = _ContextFactory.CreateDbContext();
+            context.Candidates.Remove(model);
+            await context.SaveChangesAsync();
+
+            await DisplayData();
         }
     }
 }
