@@ -2,8 +2,6 @@
 @page "/Candidates/Index/{Page:int?}"
 @page "/Candidates/List/{Page:int?}"
 
-@using Hawaso.Models.Candidates
-@using Microsoft.EntityFrameworkCore
 @*@inject CandidateAppDbContext _Context*@
 @inject IDbContextFactory<CandidateAppDbContext> _ContextFactory
 @inject NavigationManager NavigationManagerInjector
@@ -12,6 +10,8 @@
 @inject ProtectedLocalStorage ProtectedLocalStore
 
 @inject IJSRuntime JSRuntime
+
+@namespace Hawaso.Pages.Candidates
 
 <PageTitle>Candidate List</PageTitle>
 
@@ -69,10 +69,20 @@ else
         <li class="page-item @((Page == 1) ? "disabled" : "")">
             <a class="page-link" href="/Candidates/@(Page - 1)">Prev</a>
         </li>
-        @for (int i = 0; i < PageCount; i++)
+        @{
+            int start = PageIndex / (int)5 * 5 + 1;
+            int end = (PageIndex / (int)5 + 1) * 5;
+        }
+        @for (int i = start; i <= end; i++)
         {
-            <li class="page-item @((i == PageIndex) ? "active" : "")">
-                <a class="page-link" href="/Candidates/@(i + 1)">@(i + 1)</a>
+            var currentNumber = i;
+
+            if (i > PageCount)
+            {
+                break;     
+            }
+            <li class="page-item @((i == Page) ? "active" : "")">
+                <a class="page-link" href="/Candidates/@(i)">@(i)</a>
             </li>
         }
         <li class="page-item @((Page == PageCount) ? "disabled" : "")">
