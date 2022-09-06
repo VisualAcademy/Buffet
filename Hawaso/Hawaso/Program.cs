@@ -114,5 +114,4 @@ async Task CheckCandidateDbMigrated(IServiceProvider services)
         await candidateContext.Database.MigrateAsync();
     }
 }
-
 #endregion
