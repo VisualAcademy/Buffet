@@ -113,21 +113,26 @@ else
 
     protected override async Task OnParametersSetAsync()
     {
+        await DisplayData();
+    }
+
+    private async Task DisplayData()
+    {
         if (Page is null or < 1)
         {
-            //Page = 1; 
+            //Page = 1;
             NavigationManagerInjector.NavigateTo("/Candidates/Index/1");
             return;
         }
 
-        PageIndex = Page.Value - 1; 
+        PageIndex = Page.Value - 1;
 
         //Candidates = await _Context.Candidates.ToArrayAsync();
         using var context = _ContextFactory.CreateDbContext();
 
         RecordCount = await context.Candidates.CountAsync();
 
-        PageCount = Convert.ToInt32(Math.Ceiling(RecordCount / (double)PageSize)); 
+        PageCount = Convert.ToInt32(Math.Ceiling(RecordCount / (double)PageSize));
 
         if (Page > PageCount)
         {
@@ -156,5 +161,7 @@ else
         using var context = _ContextFactory.CreateDbContext();
         context.Candidates.Remove(model);
         await context.SaveChangesAsync();
+
+        await DisplayData(); 
     }
 }
