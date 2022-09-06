@@ -46,6 +46,7 @@
     [Weight]                  NVARCHAR (MAX) NULL,
     [WorkFax]                 NVARCHAR (MAX) NULL,
     [WorkPhone]               NVARCHAR (MAX) NULL,
+    [ConcurrencyToken]        ROWVERSION     NULL,
     CONSTRAINT [PK_Candidates] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
