@@ -96,9 +96,13 @@ else
             //StatusMessage = "Success";
             await GotoIndexPage(); 
         }
-        catch (Exception)
+        catch (DbUpdateConcurrencyException)
         {
-            StatusMessage = "Error";
+            StatusMessage = $"Error - 이미 삭제 또는 변경되었습니다. 새로고침 후 다시 시도하세요.";
+        }
+        catch (Exception ex)
+        {
+            StatusMessage = $"Error - {ex.Message}";
         }
         finally
         {
