@@ -12,9 +12,17 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
+
+#region 새로운 DbContext 추가 - CandidateAppDbContext
 // 새로운 DbContext 추가 
+
+//[a] MVC, RazorPages, Web API에서는 DbContext 사용 가능
 //builder.Services.AddDbContext<CandidateAppDbContext>(options => options.UseSqlServer(connectionString));
+
+//[b] Blazor Server에서는 DbContextFactory 사용 권장
 builder.Services.AddDbContextFactory<CandidateAppDbContext>(options => options.UseSqlServer(connectionString));
+#endregion
+
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
