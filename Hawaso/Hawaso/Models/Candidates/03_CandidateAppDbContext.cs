@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Hawaso.Models.Candidates.CandidatesNames;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hawaso.Models.Candidates
 {
@@ -17,5 +18,7 @@ namespace Hawaso.Models.Candidates
 
         // DbSet of T 형태의 컬렉션 속성을 사용하여 모델(도메인)에 해당하는 테이블 생성
         public DbSet<Candidate> Candidates { get; set; } = null!;
+
+        public DbSet<CandidateName> CandidatesNames { get; set; } = null!; 
     }
 }
