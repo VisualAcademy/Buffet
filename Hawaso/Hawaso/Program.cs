@@ -4,7 +4,9 @@ using Hawaso.Data;
 using Hawaso.Models.Candidates;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
+using Hawaso.Areas.Identity.Services; 
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +42,11 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<ApplicationUser>>();
 builder.Services.AddSingleton<WeatherForecastService>();
+
+
+// 종속성 주입 추가 
+builder.Services.AddTransient<IEmailSender, EmailSender>();
+
 
 var app = builder.Build();
 
