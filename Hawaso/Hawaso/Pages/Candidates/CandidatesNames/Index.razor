@@ -1,27 +1,25 @@
-﻿@page "/Candidates/{Page:int?}"
-@page "/Candidates/Index/{Page:int?}"
-@page "/Candidates/List/{Page:int?}"
+﻿@page "/Candidates/CandidatesNames/{Page:int?}"
 
-@*@inject CandidateAppDbContext _Context*@
 @inject IDbContextFactory<CandidateAppDbContext> _ContextFactory
 @inject NavigationManager NavigationManagerInjector
 
+@using Hawaso.Models.Candidates.CandidatesNames
 @using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @inject ProtectedLocalStorage ProtectedLocalStore
 
 @inject IJSRuntime JSRuntime
 
-@namespace Hawaso.Pages.Candidates
+@namespace Hawaso.Pages.Candidates.CandidatesNames
 
-<PageTitle>Candidate List</PageTitle>
+<PageTitle>CandidatesNames List</PageTitle>
 
 <h1>Index</h1>
 
 <p>
-    <a href="/Candidates/Create">Create New</a>
+    <a href="/Candidates/CandidatesNames/Create">Create New</a>
 </p>
 
-@if (Candidates is null)
+@if (Models is null)
 {
     <div>Loading...</div>
 }
@@ -37,13 +35,13 @@ else
                     LastName
                 </th>
                 <th>
-                    Is Enrollment
+                    MiddleName
                 </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var m in Candidates)
+            @foreach (var m in Models)
             {
                 <tr>
                     <td>
@@ -53,10 +51,10 @@ else
                         @m.LastName
                     </td>
                     <td>
-                        <input class="check-box" type="checkbox" checked="@m.IsEnrollment" />
+                        @m.MiddleName
                     </td>
                     <td>
-                        <a href="/Candidates/Edit/@m.Id" class="btn btn-primary btn-sm">Edit</a> |
+                        <a href="/Candidates/CandidatesNames/Edit/@m.Id" class="btn btn-primary btn-sm">Edit</a> |
                         <input type="button" class="btn btn-danger btn-sm" value="Delete"
                        @onclick="() => DeleteBy(m)" />
                     </td>
@@ -67,7 +65,7 @@ else
 
     <ul class="pagination">
         <li class="page-item @((Page == 1) ? "disabled" : "")">
-            <a class="page-link" href="/Candidates/@(Page - 1)">Prev</a>
+            <a class="page-link" href="/Candidates/CandidatesNames/@(Page - 1)">Prev</a>
         </li>
         @{
             int start = PageIndex / (int)5 * 5 + 1;
@@ -82,11 +80,11 @@ else
                 break;     
             }
             <li class="page-item @((i == Page) ? "active" : "")">
-                <a class="page-link" href="/Candidates/@(i)">@(i)</a>
+                <a class="page-link" href="/Candidates/CandidatesNames/@(i)">@(i)</a>
             </li>
         }
         <li class="page-item @((Page == PageCount) ? "disabled" : "")">
-            <a class="page-link" href="/Candidates/@(Page + 1)">Next</a>
+            <a class="page-link" href="/Candidates/CandidatesNames/@(Page + 1)">Next</a>
         </li>
     </ul>
 
@@ -94,7 +92,7 @@ else
 
 @code {
     // 현재 페이지에서 사용할 모델 또는 컬렉션
-    private Candidate[]? Candidates { get; set; }
+    private CandidateName[]? Models { get; set; }
 
     /// <summary>
     /// 페이지 사이즈: 한 페이지에 몇 개의 레코드를 보여줄건지 결정
@@ -132,7 +130,7 @@ else
         if (Page is null or < 1)
         {
             //Page = 1;
-            NavigationManagerInjector.NavigateTo("/Candidates/Index/1");
+            NavigationManagerInjector.NavigateTo("/Candidates/CandidatesNames/1");
             return;
         }
 
@@ -141,21 +139,21 @@ else
         //Candidates = await _Context.Candidates.ToArrayAsync();
         using var context = _ContextFactory.CreateDbContext();
 
-        RecordCount = await context.Candidates.CountAsync();
+        RecordCount = await context.CandidatesNames.CountAsync();
 
         PageCount = Convert.ToInt32(Math.Ceiling(RecordCount / (double)PageSize));
         if (PageCount == 0)
         {
-            PageCount = 1;
+            PageCount = 1; 
         }
 
         if (Page > PageCount)
         {
-            NavigationManagerInjector.NavigateTo($"/Candidates/List/{PageCount}");
+            NavigationManagerInjector.NavigateTo($"/Candidates/CandidatesNames/{PageCount}");
             return;
         }
 
-        Candidates = await context.Candidates
+        Models = await context.CandidatesNames
             .OrderByDescending(it => it.Id)
             .Skip(PageIndex * PageSize)
             .Take(PageSize)
@@ -167,11 +165,11 @@ else
         if (Page is not null)
         {
             // 현재 페이지 번호를 상태 데이터에 저장
-            await ProtectedLocalStore.SetAsync("Page", Page.Value);
+            await ProtectedLocalStore.SetAsync("PageCandidateName", Page.Value);
         }
     }
 
-    protected async Task DeleteBy(Candidate model)
+    protected async Task DeleteBy(CandidateName model)
     {
         bool isDelete = await JSRuntime.InvokeAsync<bool>(
             "confirm", "Are you sure you want to delete this?");
@@ -180,7 +178,7 @@ else
             try
             {
                 using var context = _ContextFactory.CreateDbContext();
-                context.Candidates.Remove(model);
+                context.CandidatesNames.Remove(model);
                 await context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
