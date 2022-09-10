@@ -8,10 +8,7 @@ namespace Hawaso.Controllers
     {
         private readonly CandidateAppDbContext _context;
 
-        public CandidateController(CandidateAppDbContext context)
-        {
-            _context = context;
-        }
+        public CandidateController(CandidateAppDbContext context) => _context = context;
 
         // GET: Candidate
         public async Task<IActionResult> Index()
