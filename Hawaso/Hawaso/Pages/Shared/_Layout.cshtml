@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Hawaso</title>
 
+    <base href="~/" />
+
     <environment include="Development">
         <link rel="stylesheet" href="~/Identity/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/Identity/css/site.css" />
@@ -88,6 +90,8 @@
         </script>
         <script src="~/Identity/js/site.js" asp-append-version="true"></script>
     </environment>
+
+    <script src="/_framework/blazor.server.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
