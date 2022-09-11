@@ -13,7 +13,7 @@
 
 <PageTitle>CandidatesNames List</PageTitle>
 
-@if (!String.IsNullOrEmpty(StatusMessage))
+@*@if (!String.IsNullOrEmpty(StatusMessage))
 {
     var statusMessageClass = StatusMessage.StartsWith("Error") ? "danger" : "success";
     <div class="alert alert-@statusMessageClass alert-dismissible" role="alert">
@@ -23,16 +23,17 @@
         </button>
         @StatusMessage
     </div>
-}
+}*@
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <Hawaso.Pages.Candidates.CandidatesNames.Components.EditorForm Model="@Model" Busy="@Busy"
                                                                        OnSubmitCallback="@OnSubmitCallback">
         </Hawaso.Pages.Candidates.CandidatesNames.Components.EditorForm>
     </div>
 </div>
 
+<hr />
 
 @if (Models is null)
 {
@@ -44,13 +45,13 @@ else
         <thead>
             <tr>
                 <th>
-                    FirstName
+                    First Name
                 </th>
                 <th>
-                    LastName
+                    Last Name
                 </th>
                 <th>
-                    MiddleName
+                    Middle Name
                 </th>
                 <th></th>
             </tr>
@@ -68,8 +69,7 @@ else
                     <td>
                         @m.MiddleName
                     </td>
-                    <td>
-                        <a href="/Candidates/CandidatesNames/Edit/@m.Id" class="btn btn-primary btn-sm">Edit</a> |
+                    <td class="text-center">
                         <input type="button" class="btn btn-danger btn-sm" value="Delete"
                        @onclick="() => DeleteBy(m)" />
                     </td>
@@ -77,31 +77,6 @@ else
             }
         </tbody>
     </table>
-
-    <ul class="pagination">
-        <li class="page-item @((Page == 1) ? "disabled" : "")">
-            <a class="page-link" href="/Candidates/CandidatesNames/@(Page - 1)">Prev</a>
-        </li>
-        @{
-            int start = PageIndex / (int)5 * 5 + 1;
-            int end = (PageIndex / (int)5 + 1) * 5;
-        }
-        @for (int i = start; i <= end; i++)
-        {
-            var currentNumber = i;
-
-            if (i > PageCount)
-            {
-                break;
-            }
-            <li class="page-item @((i == Page) ? "active" : "")">
-                <a class="page-link" href="/Candidates/CandidatesNames/@(i)">@(i)</a>
-            </li>
-        }
-        <li class="page-item @((Page == PageCount) ? "disabled" : "")">
-            <a class="page-link" href="/Candidates/CandidatesNames/@(Page + 1)">Next</a>
-        </li>
-    </ul>
 
 }
 
@@ -128,7 +103,7 @@ else
     /// <summary>
     /// 총 몇 개의 페이지가 만들어지는지: Math.Ceiling(총 레코드 수 / 10(한 페이지에서 보여줄))
     /// </summary>
-    public int PageCount { get; set; }
+    public int PageCount { get; set; } = 1;
 
     /// <summary>
     /// 레코드 카운트: 현재 테이블에 몇 개의 레코드가 있는지 지정
@@ -144,14 +119,12 @@ else
     {
         if (Page is null or < 1)
         {
-            //Page = 1;
-            NavigationManagerInjector.NavigateTo("/Candidates/CandidatesNames/1");
+            Page = 1;
             return;
         }
 
-        PageIndex = Page.Value - 1;
+        PageIndex = 0;
 
-        //Candidates = await _Context.Candidates.ToArrayAsync();
         using var context = _ContextFactory.CreateDbContext();
 
         RecordCount = await context.CandidatesNames.CountAsync();
@@ -162,26 +135,11 @@ else
             PageCount = 1;
         }
 
-        if (Page > PageCount)
-        {
-            NavigationManagerInjector.NavigateTo($"/Candidates/CandidatesNames/{PageCount}");
-            return;
-        }
-
         Models = await context.CandidatesNames
             .OrderByDescending(it => it.Id)
-            .Skip(PageIndex * PageSize)
-            .Take(PageSize)
+            //.Skip(PageIndex * PageSize)
+            //.Take(PageSize)
             .ToArrayAsync();
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (Page is not null)
-        {
-            // 현재 페이지 번호를 상태 데이터에 저장
-            await ProtectedLocalStore.SetAsync("PageCandidateName", Page.Value);
-        }
     }
 
     protected async Task DeleteBy(CandidateName model)
@@ -204,11 +162,7 @@ else
             await DisplayData();
         }
     }
-}
 
-
-
-@code {
     public CandidateName? Model { get; set; }
 
     public string? StatusMessage { get; set; }
@@ -217,7 +171,6 @@ else
 
     protected override void OnInitialized()
     {
-        //Model = new Candidate { FirstName = "YJ", LastName = "Park", IsEnrollment = true };
         Model = new();
     }
 
@@ -235,23 +188,24 @@ else
             if (Model is not null)
             {
                 using var ctx = _ContextFactory.CreateDbContext();
+                Model.UserId = "aaaa";
                 ctx.CandidatesNames.Add(Model);
-                await ctx.SaveChangesAsync();
+                ctx.SaveChanges();
 
                 StatusMessage = "Success";
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            StatusMessage = "Error";
+            StatusMessage = $"Error: {ex.Message}";
         }
         finally
         {
             Busy = false;
 
-            await DisplayData();
+            Model = new();
 
-            StateHasChanged();
+            await DisplayData();
         }
     }
 
