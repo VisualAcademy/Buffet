@@ -3,7 +3,6 @@
 
 @if (Model is not null)
 {
-
     <EditForm Model="@Model"
           OnValidSubmit="FormSubmit"
           OnInvalidSubmit="@HandleInvalidSubmit">
@@ -12,28 +11,27 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
-                    <label class="control-label" for="txtFirstName">FirstName</label>
-                    <InputText @bind-Value="Model.FirstName" id="txtFirstName" class="form-control" placeholder="Enter FirstName" />
+                    @*<label class="control-label" for="txtFirstName">FirstName</label>*@
+                    <InputText @bind-Value="Model.FirstName" id="txtFirstName" class="form-control" placeholder="First Name" />
                     <ValidationMessage For="() => Model.FirstName" />
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label class="control-label" for="txtLastName">LastName</label>
-                    <InputText @bind-Value="Model.LastName" id="txtLastName" class="form-control" placeholder="Enter LastName" />
+                    @*<label class="control-label" for="txtLastName">LastName</label>*@
+                    <InputText @bind-Value="Model.LastName" id="txtLastName" class="form-control" placeholder="Last Name" />
                     <ValidationMessage For="@(() => Model.LastName)"></ValidationMessage>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label class="control-label" for="txtMiddleName">MiddleName</label>
-                    <InputText @bind-Value="Model.MiddleName" id="txtMiddleName" class="form-control" placeholder="Enter MiddleName" />
+                    @*<label class="control-label" for="txtMiddleName">MiddleName</label>*@
+                    <InputText @bind-Value="Model.MiddleName" id="txtMiddleName" class="form-control" placeholder="Middle Name" />
                     <ValidationMessage For="@(() => Model.MiddleName)"></ValidationMessage>
                 </div>
             </div>
             <div class="col-md-1">
                 <div class="form-group">
-                    <label class="control-label">&nbsp;&nbsp;&nbsp;&nbsp;</label>
                     @if (IsEdit)
                     {
                         <input type="submit" value="Edit" class="btn btn-primary" disabled="@Busy" />
@@ -42,7 +40,7 @@
                     }
                     else
                     {
-                        <input type="submit" value="Add" class="btn btn-primary" disabled="@Busy" />
+                        <input type="submit" value="Add" class="btn btn-primary form-control" disabled="@Busy" />
                     }
                 </div>
             </div>
