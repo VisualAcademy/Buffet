@@ -109,6 +109,11 @@
 }
 
 @code {
+    // 부모 Component 또는 MVC, Razor Pages에서 넘어온 UserId 값을 받아 저장 
+    [Parameter]
+    public string UserId { get; set; } = "945503cc-ed22-4914-b40b-661cdbc732ad";
+
+    // names에 대해서 관리하는지 여부
     private bool blnNames = true;
 
     // 현재 페이지에서 사용할 모델 또는 컬렉션
@@ -157,7 +162,7 @@
 
         using var context = _ContextFactory.CreateDbContext();
 
-        RecordCount = await context.CandidatesNames.CountAsync();
+        RecordCount = await context.CandidatesNames.Where(ui => ui.UserId == UserId).CountAsync();
 
         PageCount = Convert.ToInt32(Math.Ceiling(RecordCount / (double)PageSize));
         if (PageCount == 0)
@@ -165,7 +170,7 @@
             PageCount = 1;
         }
 
-        Models = await context.CandidatesNames
+        Models = await context.CandidatesNames.Where(ui => ui.UserId == UserId)
             .OrderByDescending(it => it.Id)
             //.Skip(PageIndex * PageSize)
             //.Take(PageSize)
@@ -218,7 +223,7 @@
             if (Model is not null)
             {
                 using var ctx = _ContextFactory.CreateDbContext();
-                Model.UserId = "aaaa";
+                Model.UserId = UserId;
                 ctx.CandidatesNames.Add(Model);
                 ctx.SaveChanges();
 
