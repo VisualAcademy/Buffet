@@ -109,9 +109,11 @@
 }
 
 @code {
+    // 부모 Component 또는 MVC, Razor Pages에서 넘어온 UserId 값을 받아 저장 
     [Parameter]
     public string UserId { get; set; } = "945503cc-ed22-4914-b40b-661cdbc732ad";
 
+    // names에 대해서 관리하는지 여부
     private bool blnNames = true;
 
     // 현재 페이지에서 사용할 모델 또는 컬렉션
