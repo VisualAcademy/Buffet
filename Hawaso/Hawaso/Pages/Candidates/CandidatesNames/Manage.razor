@@ -13,21 +13,9 @@
 
 <PageTitle>CandidatesNames List</PageTitle>
 
-@*@if (!String.IsNullOrEmpty(StatusMessage))
-{
-    var statusMessageClass = StatusMessage.StartsWith("Error") ? "danger" : "success";
-    <div class="alert alert-@statusMessageClass alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert"
-            aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        @StatusMessage
-    </div>
-}*@
-
 <div class="row">
     <div id="pnlNames">
-        <span class="fw-bold">Have you ever used or been known by any other name(s)?</span>
+        <span class="fw-bold">Have you ever used or been known by any other name(s)?&nbsp;&nbsp;</span>
         <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" value="Yes" name="optNames" id="namesYes"
                    checked="@(blnNames == true)"
