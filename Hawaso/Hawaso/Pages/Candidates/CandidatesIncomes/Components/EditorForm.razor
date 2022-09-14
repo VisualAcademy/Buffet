@@ -11,8 +11,14 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
-                    <InputText @bind-Value="Model.Source" id="txtFirstName" class="form-control" placeholder="First Name" />
+                    <InputText @bind-Value="Model.Source" id="txtSource" class="form-control" placeholder="Source" />
                     <ValidationMessage For="() => Model.Source" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <InputNumber @bind-Value="Model.Amount" id="txtAmount" class="form-control" placeholder="Amount" />
+                    <ValidationMessage For="() => Model.Amount" />
                 </div>
             </div>
             <div class="col-md-1">
