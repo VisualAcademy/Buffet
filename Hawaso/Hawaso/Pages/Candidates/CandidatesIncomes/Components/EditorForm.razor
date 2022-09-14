@@ -7,17 +7,21 @@
           OnValidSubmit="FormSubmit"
           OnInvalidSubmit="@HandleInvalidSubmit">
         <DataAnnotationsValidator />
-        <ValidationSummary />
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
-                    <InputText @bind-Value="Model.Source" id="txtSource" class="form-control" placeholder="Source" />
+                    <InputText @bind-Value="Model.Source" id="txtSource" class="form-control" placeholder="Source of Income" />
                     <ValidationMessage For="() => Model.Source" />
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <InputNumber @bind-Value="Model.Amount" id="txtAmount" class="form-control" placeholder="Amount" />
+                    <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <InputNumber @bind-Value="Model.Amount" id="txtAmount" 
+                            class="form-control text-end" placeholder="Annual Amount" />
+                        <span class="input-group-text">.00</span>
+                    </div>
                     <ValidationMessage For="() => Model.Amount" />
                 </div>
             </div>

@@ -6,7 +6,7 @@ namespace Hawaso.Models.Candidates.CandidatesIncomes
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "*")]
         [StringLength(50)]
         public string? Source { get; set; }
 
