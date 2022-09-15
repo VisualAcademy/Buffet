@@ -66,7 +66,7 @@
                                                 <td class="px-3">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="text" class="form-control text-end" value="@m.Amount" />
+                                                        <input type="text" class="form-control text-end" value="@(Decimal.Truncate(m.Amount ?? 0))" />
                                                         <span class="input-group-text">.00</span>
                                                     </div>
                                                 </td>
@@ -90,7 +90,7 @@
                                                 <div class="input-group">
                                                     <span class="input-group-text">$</span>
                                                     <input type="text" class="form-control text-end" id="total-income"
-                                                        value="@Models.Sum(it => it.Amount)" />
+                                                        value="@(Decimal.Truncate(Models.Sum(it => it.Amount ?? 0)))" />
                                                     <span class="input-group-text">.00</span>
                                                 </div>
                                             </td>
