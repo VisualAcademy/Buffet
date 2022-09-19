@@ -83,6 +83,33 @@ https://youtu.be/kEGIj5IOPSI
 > [!Video https://www.youtube.com/embed/kEGIj5IOPSI]
 
 
+## 04_01_Candidates_Candidate 모델 클래스 생성하기
+
+https://youtu.be/MGvz5Ld91t0
+
+> [!Video https://www.youtube.com/embed/MGvz5Ld91t0]
+
+
+## 04_02_모델 클래스에 유효성 검사를 위한 Required와 StringLength 특성 적용하기
+
+https://youtu.be/pGdr8jShqd0
+
+> [!Video https://www.youtube.com/embed/pGdr8jShqd0]
+
+
+## 04_03_Repository 패턴
+
+https://youtu.be/MdszfsPVQCw
+
+> [!Video https://www.youtube.com/embed/MdszfsPVQCw]
+
+
+
+
+
+
+
+
 
 
 
