@@ -143,8 +143,5 @@ public class CandidateController : Controller
         return RedirectToAction(nameof(Index));
     }
 
-    private bool CandidateExists(int id)
-    {
-        return (_context.Candidates?.Any(e => e.Id == id)).GetValueOrDefault();
-    }
+    private bool CandidateExists(int id) => (_context.Candidates?.Any(e => e.Id == id)).GetValueOrDefault();
 }
