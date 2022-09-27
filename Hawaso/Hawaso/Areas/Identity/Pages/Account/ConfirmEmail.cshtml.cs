@@ -19,10 +19,7 @@ namespace Hawaso.Areas.Identity.Pages.Account
     {
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public ConfirmEmailModel(UserManager<ApplicationUser> userManager)
-        {
-            _userManager = userManager;
-        }
+        public ConfirmEmailModel(UserManager<ApplicationUser> userManager) => _userManager = userManager;
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
