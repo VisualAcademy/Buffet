@@ -10,7 +10,7 @@ namespace Hawaso.Models.Buffets
         public int Id { get; set; }
 
         [Required]
-        [StringLength(25)]
+        [MaxLength(25)] // [StringLength(25)]
         public string? Name { get; set; }
 
         public bool IsVegan { get; set; }
