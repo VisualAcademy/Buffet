@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Hawaso.Models.Buffets
 {
@@ -16,6 +17,7 @@ namespace Hawaso.Models.Buffets
         [Required]
         public int? BrothId { get; set; }
 
+        [ForeignKey("BrothId")] // Foreign Key
         public Broth? Broth { get; set; }
     }
 }
