@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Hawaso.Models.Candidates
 {
@@ -7,6 +8,8 @@ namespace Hawaso.Models.Candidates
     /// </summary>
     public class CandidateBase
     {
+        [Key] // Primary Key
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // Identity(1, 1)
         public int Id { get; set; }
 
         [Required]
