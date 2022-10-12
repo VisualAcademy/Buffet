@@ -146,7 +146,7 @@ else
         PageCount = Convert.ToInt32(Math.Ceiling(RecordCount / (double)PageSize));
         if (PageCount == 0)
         {
-            PageCount = 1;
+            PageCount = 1; // 데이터가 없으면 1 페이지로 초기화
         }
 
         if (Page > PageCount)
