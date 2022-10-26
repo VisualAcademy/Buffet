@@ -36,6 +36,15 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options => option
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
+// 암호 옵션 설정 영역
+builder.Services.Configure<IdentityOptions>(options => 
+{
+    options.Password.RequiredLength = 8;
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+});
 
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor()
