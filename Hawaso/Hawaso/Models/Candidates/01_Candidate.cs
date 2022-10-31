@@ -22,6 +22,9 @@ namespace Hawaso.Models.Candidates
 
         public bool IsEnrollment { get; set; }
 
+        /// <summary>
+        /// Update 관련 동시성 충돌 처리를 위한 속성
+        /// </summary>
         [Timestamp] // rowversion
         public byte[]? ConcurrencyToken { get; set; }
     }
