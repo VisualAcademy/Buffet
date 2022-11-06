@@ -41,8 +41,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <Hawaso.Pages.Candidates.CandidatesNames.Components.EditorForm Model="@Model" Busy="@Busy"
-                                                                       OnSubmitCallback="@OnSubmitCallback">
+            <Hawaso.Pages.Candidates.CandidatesNames.Components.EditorForm Model="@Model" Busy="@Busy" OnSubmitCallback="@OnSubmitCallback">
             </Hawaso.Pages.Candidates.CandidatesNames.Components.EditorForm>
         </div>
     </div>
@@ -99,21 +98,21 @@
 }
 
 @code {
-    // 부모 Component 또는 MVC, Razor Pages에서 넘어온 UserId 값을 받아 저장 
+    // 부모 Component 또는 MVC, Razor Pages에서 넘어온 UserId 값을 받아 저장
     [Parameter]
     public string UserId { get; set; } = "945503cc-ed22-4914-b40b-661cdbc732ad";
 
     // names에 대해서 관리하는지 여부
     [Parameter]
-    public bool UseOtherNames 
+    public bool UseOtherNames
     {
         get
         {
-            return blnNames;    
+            return blnNames;
         }
         set
         {
-            blnNames = value;     
+            blnNames = value;
         }
     }
 
@@ -173,11 +172,7 @@
             PageCount = 1;
         }
 
-        Models = await context.CandidatesNames.Where(ui => ui.UserId == UserId)
-            .OrderByDescending(it => it.Id)
-            //.Skip(PageIndex * PageSize)
-            //.Take(PageSize)
-            .ToArrayAsync();
+        Models = await context.CandidatesNames.Where(ui => ui.UserId == UserId).OrderByDescending(it => it.Id).ToArrayAsync();
     }
 
     protected async Task DeleteBy(CandidateName model)
