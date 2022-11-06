@@ -242,10 +242,7 @@
         }
     }
 
-    protected void HandleInvalidSubmit()
-    {
-        StatusMessage = "";
-    }
+    protected void HandleInvalidSubmit() => StatusMessage = "";
 
     protected async Task OnSubmitCallback(bool isValid)
     {
