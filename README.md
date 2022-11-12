@@ -113,5 +113,66 @@ https://youtu.be/MdszfsPVQCw
 
 
 
+## 강의 소개 ReadMe
+
+
+.NET 7.0 버전 기반의 Blazor Server 학습에 대한 모든 내용을 담고 있는 재생 목록입니다. 
+
+전체 강의 시간은 88회차 10시간  13분입니다.
+
+Blazor Server 강의는 ASP.NET Core Part 1 ~ Part 5를 알고 있다고 가정하고 진행합니다.
+
+물론, C# 기초에 바로 현재 재생 목록을 시청해도 됩니다. 
+
+
+다음 리스트와 같이 총 4단계로 진행됩니다.
+
+0. Blazor Server 7.0 Fundamentals 
+1. 기초 입문(사용자 모드, UI)
+2. 게시판 만들기(CRUD)
+3. 홈페이지 만들기(관리자 모드, 대시보드)
+
+Part 0.
+최신 버전의 Visual Studio를 설치 후 Blazor를 사용하여 CRUD를 구현하는 전체 내용을 다룹니다.
+파트 1 강좌와 겹치는 부분이 있기에 함께 시청을 권장합니다. 
+
+Part 1.
+현재 재생 목록은 데브렉(www.devlec.com)을 통해서 유료 서비스 중인 블레이저 기초 입문 강좌에 대한 목록 정리용입니다.
+
+Part 2.
+데브렉에서 제공하고 있는 블레이저 게시판 프로젝트 강좌 목록입니다.
+
+Part 3.
+이 강의의 목표는 다음 링크의 사이트를 모두 만드는 내용을 다룹니다.
+https://www.hawaso.com
+
+
+Blazor(블레이저)를 사용하여 회사 홈페이지와 관리자 페이지를 만들어 가는 과정을 보여줍니다. 기본적으로 ASP.NET Core 기초와 Blazor 기초를 알고 있다고 가정하고 진행합니다.
+
+현재 다음 내용이 준비중입니다.
+
+- 역할 관리(ASP.NET Core Identity)
+- 고객 관리(Customers + CRUD)
+- 공통 코드 관리
+- 거래처 관리(CRUD + Popup)
+- 공지사항 게시판(NoticeApp)
+- ...
+
+이 과정을 모두 듣게되면,
+일반적인 CRUD, Paging, Sorting, Excel Import/Export, Chart 등의 기능을 적용하는 모든 과정을 학습하게 됩니다.
+
+참고로, 여기서 전체 커리큘럼이 완성된 후에는 데브렉을 통해서 서비스가 됩니다.
+
+감사합니다.
+
+
+
+
+
+
+
+
+
+
 
 
