@@ -9,6 +9,7 @@ namespace Hawaso.Models.Candidates
         public CandidateAppDbContext() : base()
         {
             // Empty
+            // 만약, Repository 클래스에 생성자 매개 변수 주입 방식 사용시 이 생성자 제거 
         }
 
         public CandidateAppDbContext(DbContextOptions<CandidateAppDbContext> options) 
