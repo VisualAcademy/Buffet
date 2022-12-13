@@ -91,7 +91,7 @@
             {
                 Model.Age = 0;
 
-                using var ctx = _ContextFactory.CreateDbContext();
+                using var ctx = _ContextFactory.CreateDbContext(); // DbContext 생성 
                 ctx.Candidates.Add(Model);
                 await ctx.SaveChangesAsync();
                 // await Task.Delay(5000); 

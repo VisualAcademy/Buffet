@@ -138,8 +138,10 @@ else
 
         PageIndex = Page.Value - 1;
 
+        // Blazor에서는 반드시 DbContext facotry 사용 권장(필수) 
+        // https://learn.microsoft.com/en-us/ef/core/dbcontext-configuration/
         //Candidates = await _Context.Candidates.ToArrayAsync();
-        using var context = _ContextFactory.CreateDbContext();
+        using var context = _ContextFactory.CreateDbContext(); // DbContext 생성
 
         RecordCount = await context.Candidates.CountAsync();
 
