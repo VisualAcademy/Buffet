@@ -122,10 +122,7 @@ else
     /// </summary>
     public int RecordCount { get; set; }
 
-    protected override async Task OnParametersSetAsync()
-    {
-        await DisplayData();
-    }
+    protected override async Task OnParametersSetAsync() => await DisplayData();
 
     private async Task DisplayData()
     {
