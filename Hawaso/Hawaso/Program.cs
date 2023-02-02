@@ -63,7 +63,7 @@ var app = builder.Build();
 // 개발 환경에서 Update-Database, Seed 데이터 추가
 if (app.Environment.IsDevelopment())
 {
-    await CheckCandidateDbMigrated(app.Services);
+    //await CheckCandidateDbMigrated(app.Services);
     CandidateSeedData(app);
     CandidateDbInitializer.Initialize(app);
 }

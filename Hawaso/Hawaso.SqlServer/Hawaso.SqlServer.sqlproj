@@ -75,6 +75,8 @@
     <Build Include="dbo\Tables\Noodles.sql" />
     <Build Include="dbo\Tables\Garnishes.sql" />
     <Build Include="dbo\Tables\Candidates.sql" />
+    <Build Include="dbo\Tables\CandidatesIncomes.sql" />
+    <Build Include="dbo\Tables\CandidatesNames.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\CandidatesAppDbContext.sql" />
