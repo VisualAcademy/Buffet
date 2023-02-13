@@ -1,20 +1,19 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Hawaso.Models.Buffets
+namespace Hawaso.Models.Buffets;
+
+/// <summary>
+/// 국물
+/// </summary>
+public class Broth
 {
-    /// <summary>
-    /// 국물
-    /// </summary>
-    public class Broth
-    {
-        public int Id { get; set; }
+    public int Id { get; set; }
 
-        [Required]
-        [MaxLength(25)] // [StringLength(25)]
-        public string? Name { get; set; }
+    [Required]
+    [MaxLength(25)] // [StringLength(25)]
+    public string? Name { get; set; }
 
-        public bool IsVegan { get; set; }
+    public bool IsVegan { get; set; }
 
-        public List<Noodle> Noodles { get; set; } = new();
-    }
+    public List<Noodle> Noodles { get; set; } = new();
 }
