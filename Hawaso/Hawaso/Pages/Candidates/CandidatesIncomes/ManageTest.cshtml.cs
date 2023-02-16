@@ -11,10 +11,7 @@ public class ManageTestModel : PageModel
 
     public string UserId { get; set; }
 
-    public ManageTestModel(UserManager<ApplicationUser> userManager)
-    {
-        _userManager = userManager;
-    }
+    public ManageTestModel(UserManager<ApplicationUser> userManager) => _userManager = userManager;
 
     private async Task LoadAsync(ApplicationUser user)
     {
