@@ -1,17 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Hawaso.Models.Candidates.CandidatesIncomes
+namespace Hawaso.Models.Candidates.CandidatesIncomes;
+
+public class CandidateIncome
 {
-    public class CandidateIncome
-    {
-        public int Id { get; set; }
+    public int Id { get; set; }
 
-        [Required(ErrorMessage = "*")]
-        [StringLength(50)]
-        public string? Source { get; set; }
+    [Required(ErrorMessage = "*")]
+    [StringLength(50)]
+    public string? Source { get; set; }
 
-        public decimal? Amount { get; set; }
+    public decimal? Amount { get; set; }
 
-        public string? UserId { get; set; } = null;
-    }
+    public string? UserId { get; set; } = null;
 }
