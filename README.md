@@ -5,6 +5,10 @@ Blazor Server 7.0 버전에 대한 기초 입문 강좌입니다.
 모든 소스는 다음 리포지토리에 있습니다. 
 
 * https://github.com/VisualAcademy/Buffet
+   
+   현재 리포지토리의 모든 소스는 강의 메인 소스인 다음 리포지토리에서 업데이트 관리됩니다. 
+   
+   * https://github.com/VisualAcademy/VisualAcademy
 
 모든 강의는 다음 경로의 데브렉(http://www.devlec.com) 사이트를 통해서 서비스가 됩니다. 
 
